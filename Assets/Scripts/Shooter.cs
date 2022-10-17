@@ -7,6 +7,8 @@ public class Shooter : MonoBehaviour
     [SerializeField] private Transform firingOrigin = null;
     [SerializeField] private GameObject bulletPrefab = null;
     [SerializeField] private float bulletForce = 20f;
+    [SerializeField] private float ammo = 20f;
+    [SerializeField] private float maxAmmo = 20f;
 
     private void Update()
     {
@@ -18,8 +20,17 @@ public class Shooter : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
-        Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
-        rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
+        if (ammo > 0) 
+        {
+            GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
+            Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
+            rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
+            ammo -= 1;
+        }
+    }
+
+    public void Reload(int amount)
+    {
+        ammo = Mathf.Min(ammo + amount, maxAmmo);
     }
 }

@@ -17,6 +17,11 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
     }
 
+    public void SpeedUp(int amount)
+    {
+        moveSpeed += amount;
+    }
+
     private void Update()
     {
         movement.x = Input.GetAxis("Horizontal");
