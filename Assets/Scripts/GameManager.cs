@@ -4,7 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private int startCoins = 20;
+    [SerializeField] private GameObject shopMenu = null;
+
     private int enemiesLeft;
+    private bool shopMenuOn = false;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            shopMenuOn = !shopMenuOn;
+            shopMenu.SetActive(shopMenuOn);
+            if (shopMenuOn)
+            {
+                // pause game
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                // resume game
+                Time.timeScale = 1f;
+            }
+        }
+    }
 
     public void RegisterEnemy()
     {
@@ -19,5 +42,15 @@ public class GameManager : MonoBehaviour
             // Player has won!
             Debug.Log("Won!");
         }
+    }
+
+    public int GetCoins()
+    {
+        return startCoins;
+    }
+
+    public void AddCoins(int amount)
+    {
+        startCoins += amount;
     }
 }
