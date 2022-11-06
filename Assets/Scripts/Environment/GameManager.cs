@@ -5,8 +5,30 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private int coins = 20;
+    [SerializeField] private GameObject shopMenu = null;
+
     private int enemiesLeft;
     public bool hasKey = false;
+    private bool shopOn = false;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            shopOn = !shopOn;
+            shopMenu.SetActive(shopOn);
+
+            if (shopOn)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
+        }
+    }
 
     public void RegisterEnemy()
     {
@@ -32,5 +54,15 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void AddCoins(int amount)
+    {
+        coins += amount;
+    }
+
+    public int GetCoins()
+    {
+        return coins;
     }
 }

@@ -9,13 +9,26 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float bulletForce = 20f;
     [SerializeField] private float ammo = 20f;
     [SerializeField] private float maxAmmo = 20f;
+    [SerializeField] private int rechargeRate = 1;
+    [SerializeField] private int rechargeDelay = 5;
+    [SerializeField] private int chargeDelay = 1;
+
+    private float rechargeStart = 0f;
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.timeScale > 0f)
         {
-            Shoot();
+            if (ammo > 0)
+            {
+                Shoot();
+            }
+            else
+            {
+                Debug.Log("Out of Ammo");
+            }
         }
+        Recharge();
     }
 
     private void Shoot()
@@ -26,6 +39,17 @@ public class Shooter : MonoBehaviour
             Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
             rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
             ammo -= 1;
+            rechargeStart = Time.time + rechargeDelay;
+        }
+    }
+
+    private void Recharge()
+    {
+        if (Time.time > rechargeStart && ammo < maxAmmo)
+        {
+            ammo = Mathf.Min(maxAmmo, ammo + rechargeRate);
+            rechargeStart = rechargeStart + chargeDelay;
+            Debug.Log("+1 Ammo");
         }
     }
 
