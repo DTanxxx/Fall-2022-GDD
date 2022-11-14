@@ -17,7 +17,7 @@ public class Shooter : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.timeScale > 0f)
         {
             if (ammo > 0)
             {
