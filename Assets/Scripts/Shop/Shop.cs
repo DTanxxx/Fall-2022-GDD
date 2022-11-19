@@ -8,13 +8,13 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] private ShopItem[] itemsForSale;
 
-    private GameManager gameManager;
+    private Inventory inventory;
 
     public static Action shopUpdated;
 
     private void Awake()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        inventory = FindObjectOfType<Inventory>();
         foreach (var item in itemsForSale)
         {
             item.ResetPurchasedState();
@@ -29,14 +29,14 @@ public class Shop : MonoBehaviour
 
     public int GetPlayerCoins()
     {
-        return gameManager.GetCoins();
+        return inventory.GetCoins();
     }
 
     public bool PurchaseItem(int index)
     {
         ShopItem item = itemsForSale[index];
 
-        bool success = item.GetPrice() <= gameManager.GetCoins();
+        bool success = item.GetPrice() <= inventory.GetCoins();
         if (!success)
         {
             Debug.Log("Not enough money to purchase " + item.GetDisplayName());
@@ -45,7 +45,7 @@ public class Shop : MonoBehaviour
 
         Debug.Log("Purchased " + item.GetDisplayName());
         item.Purchase();
-        gameManager.AddCoins(-item.GetPrice());
+        inventory.GainCoins(-item.GetPrice());
         ApplyItemEffect(index);
 
         if (shopUpdated != null)
@@ -58,6 +58,8 @@ public class Shop : MonoBehaviour
     private void ApplyItemEffect(int index)
     {
         // EXTRA LOGIC TO DETERMINE HOW ITEM AT INDEX index SHOULD CHANGE GAMEPLAY
+        // For now, the only item for sale is full health restoration
+        FindObjectOfType<PlayerMovement>().GetComponent<Health>().Heal(100);
     }
 
     public ShopItem[] GetShopItems()

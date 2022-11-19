@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] protected GameObject hitVFX = null;
-    [SerializeField] protected string tagToAvoid = "Player";
-    [SerializeField] protected int damageDealt = 1;
+    [SerializeField] private GameObject hitVFX = null;
+    [SerializeField] private string tagToAvoid = "Player";
+    [SerializeField] private string tagToAvoid2 = "Bullet";
+    [SerializeField] private int damageDealt = 1;
 
     protected GameObject player;
 
@@ -27,7 +28,7 @@ public class Bullet : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == tagToAvoid || collision.gameObject.GetComponent<LayerTrigger>()) { return; }
+        if (collision.gameObject.tag == tagToAvoid || collision.gameObject.tag == tagToAvoid2 || collision.gameObject.GetComponent<LayerTrigger>()) { return; }
         GameObject vfx = Instantiate(hitVFX, transform.position, Quaternion.identity);
         vfx.layer = gameObject.layer;
         vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;

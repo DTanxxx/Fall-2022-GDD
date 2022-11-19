@@ -14,11 +14,16 @@ public class ShamanBullet : Bullet
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Shaman" || collision.gameObject.tag == tagToAvoid || collision.gameObject.GetComponent<LayerTrigger>()) { return; }
-
-        if(collision.gameObject.GetComponent<Health>()){    
-            collision.gameObject.GetComponent<Health>().setImmuneState(true);
+        if (collision.gameObject.GetComponent<EnemyShaman>() || collision.gameObject.tag == tagToAvoid || collision.gameObject.GetComponent<LayerTrigger>()) { return; }
+        GameObject vfx = Instantiate(hitVFX, transform.position, Quaternion.identity);
+        vfx.layer = gameObject.layer;
+        vfx.GetComponent<SpriteRenderer>().sortingLayerName = GetComponent<SpriteRenderer>().sortingLayerName;
+        if (collision.gameObject.GetComponent<Health>())
+        {
+            collision.gameObject.GetComponent<Health>().setImmuneState();
         }
-        base.OnTriggerEnter2D(collision);
+            
+        Destroy(vfx, 5f);
+        Destroy(gameObject);
     }
 }

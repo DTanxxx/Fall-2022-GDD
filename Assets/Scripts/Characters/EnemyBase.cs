@@ -60,7 +60,7 @@ public class EnemyBase : MonoBehaviour
     {
         if (seePlayer)
         {
-            Debug.Log("See!");
+            // Debug.Log("See!");
             Vector2 playerPos = player.gameObject.transform.position;
             Vector2 lookDirection = playerPos - rb.position;
             //float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90f;

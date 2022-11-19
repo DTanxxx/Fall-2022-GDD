@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int coins = 20;
     [SerializeField] private GameObject shopMenu = null;
 
     private int enemiesLeft;
     public bool hasKey = false;
     private bool shopOn = false;
+    public int minigunAmmo = 100;
 
     private void Update()
     {
@@ -54,15 +54,5 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void AddCoins(int amount)
-    {
-        coins += amount;
-    }
-
-    public int GetCoins()
-    {
-        return coins;
     }
 }

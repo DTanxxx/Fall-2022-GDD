@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AddMovement : MonoBehaviour
 {
+    [SerializeField] private float speedBoost = 3f;
     // Start is called before the first frame update
 
     // Update is called once per frame
@@ -11,7 +12,7 @@ public class AddMovement : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerMovement>())
         {
-            collision.gameObject.GetComponent<PlayerMovement>().SpeedUp(3);
+            collision.gameObject.GetComponent<PlayerMovement>().SpeedUp(speedBoost);
             Destroy(gameObject);
         }
     }
