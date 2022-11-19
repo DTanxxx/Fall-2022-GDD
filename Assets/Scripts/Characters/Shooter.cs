@@ -6,55 +6,40 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private Transform firingOrigin = null;
     [SerializeField] private GameObject bulletPrefab = null;
-    [SerializeField] private float bulletForce = 20f;
-    [SerializeField] private float ammo = 20f;
-    [SerializeField] private float maxAmmo = 20f;
-    [SerializeField] private int rechargeRate = 1;
-    [SerializeField] private int rechargeDelay = 5;
-    [SerializeField] private int chargeDelay = 1;
+    [SerializeField] private GameObject pistolPrefab = null;
+    [SerializeField] private GameObject minigunPrefab = null;
+    private Gun currentGun;
 
-    private float rechargeStart = 0f;
-
-    private void Update()
-    {
-        if (Input.GetButtonDown("Fire1") && Time.timeScale > 0f)
-        {
-            if (ammo > 0)
-            {
-                Shoot();
-            }
-            else
-            {
-                Debug.Log("Out of Ammo");
-            }
-        }
-        Recharge();
+    private void Start() {
+        currentGun = new Pistol(firingOrigin, bulletPrefab, pistolPrefab);
     }
 
-    private void Shoot()
-    {
-        if (ammo > 0) 
-        {
-            GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
-            Rigidbody2D rb = bulletInstance.GetComponent<Rigidbody2D>();
-            rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
-            ammo -= 1;
-            rechargeStart = Time.time + rechargeDelay;
-        }
+    private void Update() {
+        currentGun.Update();
+        Debug.Log(currentGun.ammoCount());
     }
 
-    private void Recharge()
-    {
-        if (Time.time > rechargeStart && ammo < maxAmmo)
-        {
-            ammo = Mathf.Min(maxAmmo, ammo + rechargeRate);
-            rechargeStart = rechargeStart + chargeDelay;
-            Debug.Log("+1 Ammo");
-        }
+    public void Reload() {
+        currentGun.Reload();
     }
 
-    public void Reload(int amount)
-    {
-        ammo = Mathf.Min(ammo + amount, maxAmmo);
+    public void switchMinigun() {
+        currentGun.drop();
+        currentGun = new Minigun(firingOrigin, bulletPrefab, minigunPrefab, FindObjectOfType<GameManager>().minigunAmmo);
+        FindObjectOfType<CurrentGunUI>().switchMinigun();
+    }
+
+    public void switchPistol() {
+        currentGun.drop();
+        currentGun = new Pistol(firingOrigin, bulletPrefab, pistolPrefab);
+        FindObjectOfType<CurrentGunUI>().switchPistol();
+    }
+
+    public int ammoCount() {
+        return currentGun.ammoCount();
+    }
+
+    public int maxAmmoCount() {
+        return currentGun.maxAmmoCount();
     }
 }

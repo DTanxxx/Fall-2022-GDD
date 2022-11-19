@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6954552094790282887}
   - component: {fileID: -2087201096716928708}
   m_Layer: 20
-  m_Name: Enemy Bullet
+  m_Name: Minigun Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6954552094790282884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.963, y: 2.682, z: 0}
-  m_LocalScale: {x: 1.7552, y: 1.7839, z: 1}
+  m_LocalPosition: {x: 4.963, y: 2.681, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 251925328a35b4b1f86bc7bfc46ba9a3, type: 3}
-  m_Color: {r: 0.03116761, g: 0.93366456, b: 0.9716981, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0021022186, y: 0}
+  m_Offset: {x: 0.0021022186, y: -0.05}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.10238281, y: 0.32}
+  m_Size: {x: 0.1, y: 0.2}
   m_EdgeRadius: 0
 --- !u!114 &-2087201096716928708
 MonoBehaviour:
@@ -145,5 +145,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitVFX: {fileID: 8699622481109766837, guid: f8c82a5fe18b82143b008ac4f5976d73, type: 3}
-  tagToAvoid: Enemy
+  tagToAvoid: Player
   damageDealt: 1

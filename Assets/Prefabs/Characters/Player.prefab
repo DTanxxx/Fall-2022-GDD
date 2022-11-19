@@ -164,9 +164,10 @@ MonoBehaviour:
   firingOrigin: {fileID: 3070283929601844694}
   bulletPrefab: {fileID: 6954552094790282884, guid: 48a101623590c1748b7a5f87d60325ed,
     type: 3}
-  bulletForce: 20
-  ammo: 20
-  maxAmmo: 20
+  pistolPrefab: {fileID: 6284775158396743074, guid: c017f9797af3b47a5b6cf35611af3644,
+    type: 3}
+  minigunPrefab: {fileID: 8479612845936640240, guid: f040fcd53ed3f43ecb7d32b37f550059,
+    type: 3}
 --- !u!114 &7649259413947932004
 MonoBehaviour:
   m_ObjectHideFlags: 0
