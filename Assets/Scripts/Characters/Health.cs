@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     private float immuneTimer;
     private float immuneDuration = 2.0f;
     private SpriteRenderer rend;
+    private Boolean immune;
 
     public static Action<GameObject> onTakeDamage;
 
