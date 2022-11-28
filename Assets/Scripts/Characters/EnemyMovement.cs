@@ -92,15 +92,15 @@ public class EnemyMovement : MonoBehaviour
                 Time.deltaTime * patrolSpeed * multiplier);
        */
     }
-
     public void MoveTo(Vector3 position, float multiplier)
     {
-        nwq
-        GetComponent<AIDestinationSetter>().target = position;
+        //GetComponent<AIDestinationSetter>().target = position;
         GetComponent<AIPath>().maxSpeed = patrolSpeed * multiplier;
+        transform.position = Vector2.MoveTowards(
+                transform.position,
+                position,
+                Time.deltaTime * patrolSpeed * multiplier);
     }
-
-
 
     private IEnumerator PauseThenStart()
     {

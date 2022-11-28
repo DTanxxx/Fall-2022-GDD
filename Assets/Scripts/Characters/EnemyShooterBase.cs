@@ -50,6 +50,7 @@ public abstract class EnemyShooterBase : EnemyBase{
             if (timeUntilNextDodge <= 0f)
             {
                 Debug.Log("Dodge");
+                Dodge();
                 timeUntilNextDodge = 5f;
             }
         }
@@ -61,7 +62,9 @@ public abstract class EnemyShooterBase : EnemyBase{
 
     protected void Dodge()
     {
-        transform.parent.GetComponent<EnemyMovement>().MoveTo(transform.position, speedMultiplier);
+        Vector3 currentPosition = this.transform.position;
+        Vector3 newPos = currentPosition - new Vector3(10, 0, 0);
+        transform.parent.GetComponent<EnemyMovement>().MoveTo(newPos, speedMultiplier * 2);
     }
 
 
