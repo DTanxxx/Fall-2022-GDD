@@ -6,7 +6,7 @@ using System.Threading;
 public abstract class EnemyShooterBase : EnemyBase{
     [SerializeField] protected GameObject bulletPrefab = null;
     [SerializeField] protected float bulletForce = 20f;
-    protected int timeUntilNextDodge = 0;
+    protected float timeUntilNextDodge = 0f;
 
     private bool timerRunning = false;
 
@@ -44,23 +44,26 @@ public abstract class EnemyShooterBase : EnemyBase{
 
     protected void DodgePlayerIfSeen()
     {
-        if (seePlayer && !timerRunning)
+        if (seePlayer)
         {
-            //timeUntilNextDodge = Random.Next(2, 10);
-            timeUntilNextDodge = 5;
-            timerRunning = true;
-        } 
-        else 
-        {
-            while (timeUntilNextDodge > 0)
+            timeUntilNextDodge -= Time.deltaTime;
+            if (timeUntilNextDodge <= 0f)
             {
-                Thread.Sleep(1000);
-                timeUntilNextDodge -= 1;
+                Debug.Log("Dodge");
+                timeUntilNextDodge = 5f;
             }
-            Debug.Log("Dodge");
-            timerRunning = false;
+        }
+        else
+        {
+            timeUntilNextDodge = 5f;
         }
     }
+
+    protected void Dodge()
+    {
+        transform.parent.GetComponent<EnemyMovement>().MoveTo(transform.position, speedMultiplier);
+    }
+
 
     public override string toString(){
         return "EnemyShooterBase";
