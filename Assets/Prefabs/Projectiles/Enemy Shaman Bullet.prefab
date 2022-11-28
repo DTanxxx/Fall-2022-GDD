@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6954552094790282888}
   - component: {fileID: 6954552094790282887}
   - component: {fileID: 8458440820446877231}
-  m_Layer: 20
+  m_Layer: 21
   m_Name: Enemy Shaman Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1869315837
-  m_SortingLayer: 2
+  m_SortingLayerID: -44025399
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 251925328a35b4b1f86bc7bfc46ba9a3, type: 3}
   m_Color: {r: 0.47553435, g: 0.031372517, b: 0.972549, a: 1}
@@ -146,4 +146,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitVFX: {fileID: 8699622481109766837, guid: f8c82a5fe18b82143b008ac4f5976d73, type: 3}
   tagToAvoid: Player
+  tagToAvoid2: Bullet
   damageDealt: 1

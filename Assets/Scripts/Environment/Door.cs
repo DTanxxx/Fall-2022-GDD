@@ -28,8 +28,7 @@ public class Door : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && open)
         {
-            FindObjectOfType<GameManager>().RestartLevel();
-            Debug.Log("Restart Level");
+            FindObjectOfType<GameManager>().NextLevel();
         }
     }
 }

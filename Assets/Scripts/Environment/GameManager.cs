@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private int enemiesLeft;
     public bool hasKey = false;
     private bool shopOn = false;
-    public int minigunAmmo = 100;
+    public int minigunAmmo = 50;
 
     private void Update()
     {
@@ -54,5 +54,11 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void NextLevel()
+    {
+        int currIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene((currIndex + 1) % 2);
     }
 }

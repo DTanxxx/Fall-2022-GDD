@@ -15,7 +15,7 @@ public class Health : MonoBehaviour
     private float immuneTimer;
     private float immuneDuration = 2.0f;
     private SpriteRenderer rend;
-    private Boolean immune;
+    private bool immune = false;
 
     public static Action<GameObject> onTakeDamage;
 
@@ -57,10 +57,19 @@ public class Health : MonoBehaviour
     public void TakeDamage(int amount)
     {
         if(immuneState && immuneTimer > Mathf.Epsilon){
-            amount = 0;
+            return;
         } else {
             immuneState = false;
             immuneTimer = 0f;
+            var color = rend.color;
+            color.a = 1f;
+            rend.color = color;
+        }
+
+        // From powerup
+        if (immune)
+        {
+            return;
         }
 
         currentHealth = Mathf.Max(0, currentHealth - amount);
@@ -90,10 +99,14 @@ public class Health : MonoBehaviour
         }
     }
 
+    // From Shaman
     public void setImmuneState()
     {
         immuneState = true;
         immuneTimer = immuneDuration;
+        var color = rend.color;
+        color.a = immuneAlpha;
+        rend.color = color;
     }
 
     public int GetCurrentHealth()
