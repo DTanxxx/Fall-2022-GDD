@@ -8,8 +8,8 @@ public class Minigun : Gun
     public GameObject bulletPrefab = null;
     public GameObject minigunPrefab = null;
     public float bulletForce = 20f;
-    public new int ammo = 100;
-    public new int maxAmmo = 100;
+    public new int ammo = 50;
+    public new int maxAmmo = 50;
     private float fireDelay = 0.05f;
     public new int reloadAmount = 50;
 

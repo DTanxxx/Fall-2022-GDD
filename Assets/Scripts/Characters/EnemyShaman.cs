@@ -5,8 +5,8 @@ using Pathfinding;
 
 public class EnemyShaman : EnemyShooterBase{
 
-    List<EnemyShooterBase> enemies = new List<EnemyShooterBase>();
-    EnemyShooterBase closest;
+    List<EnemyBase> enemies = new List<EnemyBase>();
+    EnemyBase closest;
 
     protected override void Start()
     {
@@ -39,20 +39,26 @@ public class EnemyShaman : EnemyShooterBase{
     }
 
     private void determineClosest(){
-        foreach(EnemyShooterBase enemy in FindObjectsOfType<EnemyShooterBase>()){
+        enemies.Clear();
+        foreach(EnemyBase enemy in FindObjectsOfType<EnemyBase>()){
             if (enemy.toString() != "EnemyShaman"){
                 enemies.Add(enemy);
             }
         }
         float closestDist = 1000000.0f;
-        foreach(EnemyShooterBase enemy in enemies){
-            closest = closestDist > Vector3.Distance(enemy.transform.position, transform.position) ? enemy : closest;        
+        foreach(EnemyBase enemy in enemies){
+            var dist = Vector3.Distance(enemy.transform.position, transform.position);
+            if (dist < closestDist)
+            {
+                closest = enemy;
+                closestDist = dist;
+            }
         }
     }
 
     protected override void FirePlayerIfSeen()
     {
-        if (seePlayer && fireTimer <= Mathf.Epsilon)
+        if (fireTimer <= Mathf.Epsilon)
         {
             // Debug.Log("Fire!");
             var fireDir = (closest.transform.position - transform.position).normalized;
@@ -64,9 +70,9 @@ public class EnemyShaman : EnemyShooterBase{
             //rb.AddForce(-1 * firingOrigin.up * bulletForce, ForceMode2D.Impulse);
             fireTimer = fireInterval;
         }
-        else if (seePlayer && fireTimer > Mathf.Epsilon)
+        else
         {
-            fireTimer = Mathf.Max(0f, fireTimer - Time.deltaTime);
+            fireTimer -= Time.deltaTime;
         }
     }
 

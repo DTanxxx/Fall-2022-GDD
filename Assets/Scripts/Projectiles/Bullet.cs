@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] public GameObject hitVFX = null;
-    [SerializeField] public string tagToAvoid = "Player";
-    [SerializeField] public string tagToAvoid2 = "Bullet";
-    [SerializeField] public int damageDealt = 1;
+    [SerializeField] protected GameObject hitVFX = null;
+    [SerializeField] protected string tagToAvoid = "Player";
+    [SerializeField] protected string tagToAvoid2 = "Bullet";
+    [SerializeField] protected int damageDealt = 1;
 
     protected GameObject player;
 
