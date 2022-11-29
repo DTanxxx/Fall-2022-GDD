@@ -16,7 +16,6 @@ public class Shooter : MonoBehaviour
 
     private void Update() {
         currentGun.Update();
-        Debug.Log(currentGun.ammoCount());
     }
 
     public void Reload() {

@@ -9,7 +9,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected string tagToAvoid = "Player";
     [SerializeField] protected string tagToAvoid2 = "Bullet";
     [SerializeField] protected int damageDealt = 1;
-
     protected GameObject player;
 
     protected virtual void Start()
