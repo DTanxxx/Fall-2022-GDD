@@ -6,7 +6,11 @@ using System.Threading;
 public abstract class EnemyShooterBase : EnemyBase{
     [SerializeField] protected GameObject bulletPrefab = null;
     [SerializeField] protected float bulletForce = 20f;
-    protected float timeUntilNextDodge = 0f;
+    [SerializeField] protected GameObject strafeWaypoint;
+    protected float timeUntilNextDodge = 3f;
+    protected float dodgeCooldown = 3f;
+    protected bool dodgeLeft = true;
+    protected Vector3 offset;
 
     private bool timerRunning = false;
 
@@ -50,21 +54,34 @@ public abstract class EnemyShooterBase : EnemyBase{
             if (timeUntilNextDodge <= 0f)
             {
                 Debug.Log("Dodge");
-                Dodge();
-                timeUntilNextDodge = 5f;
+                Debug.Log(transform.position);
+                //Dodge();
+                timeUntilNextDodge = dodgeCooldown;
+                Debug.Log(transform.position);
             }
         }
         else
         {
-            timeUntilNextDodge = 5f;
+            timeUntilNextDodge = dodgeCooldown;
         }
     }
 
     protected void Dodge()
     {
-        Vector3 currentPosition = this.transform.position;
-        Vector3 newPos = currentPosition - new Vector3(10, 0, 0);
-        transform.parent.GetComponent<EnemyMovement>().MoveTo(newPos, speedMultiplier * 2);
+        if (dodgeLeft == true) 
+        {
+            offset = new Vector3(10, 0, 0);
+            dodgeLeft = false;
+        }
+        else 
+        {
+            offset = new Vector3(-10, 0, 0);
+            dodgeLeft = true;
+        }
+        Vector3 newPos = transform.position + offset;
+        Vector3 localPos = transform.InverseTransformPoint(newPos);
+        strafeWaypoint.transform.position = localPos;
+        transform.parent.GetComponent<EnemyMovement>().MoveTo(strafeWaypoint.transform, speedMultiplier * 6);
     }
 
 
