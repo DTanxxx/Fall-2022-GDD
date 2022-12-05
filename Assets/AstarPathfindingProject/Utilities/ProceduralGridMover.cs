@@ -155,7 +155,7 @@ namespace Pathfinding {
 				    // The code MAY throw an exception in rare circumstances if for example the user
 				    // changes the width of the graph in the inspector while an update is being performed
 				    // at the same time. So lets just fail in that case and retry later.
-					Debug.LogException(e, this);
+					//Debug.LogException(e, this);
 					done = true;
 				}
 

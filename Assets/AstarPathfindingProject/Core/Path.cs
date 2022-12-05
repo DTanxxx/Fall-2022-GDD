@@ -31,16 +31,16 @@ namespace Pathfinding {
 		private string pathTraceInfo = "";
 		private List<string> claimInfo = new List<string>();
 		~Path() {
-			Debug.Log("Destroying " + GetType().Name + " instance");
+			//Debug.Log("Destroying " + GetType().Name + " instance");
 			if (claimed.Count > 0) {
-				Debug.LogWarning("Pool Is Leaking. See list of claims:\n" +
+				//Debug.LogWarning("Pool Is Leaking. See list of claims:\n" +
 					"Each message below will list what objects are currently claiming the path." +
 					" These objects have removed their reference to the path object but has not called .Release on it (which is bad).\n" + pathTraceInfo+"\n");
 				for (int i = 0; i < claimed.Count; i++) {
-					Debug.LogWarning("- Claim "+ (i+1) + " is by a " + claimed[i].GetType().Name + "\n"+claimInfo[i]);
+					//Debug.LogWarning("- Claim "+ (i+1) + " is by a " + claimed[i].GetType().Name + "\n"+claimInfo[i]);
 				}
 			} else {
-				Debug.Log("Some scripts are not using pooling.\n" + pathTraceInfo + "\n");
+				//Debug.Log("Some scripts are not using pooling.\n" + pathTraceInfo + "\n");
 			}
 		}
 #endif
@@ -666,7 +666,7 @@ namespace Pathfinding {
 				c = c.parent;
 				count++;
 				if (count > 2048) {
-					Debug.LogWarning("Infinite loop? >2048 node path. Remove this message if you really have that long paths (Path.cs, Trace method)");
+					//Debug.LogWarning("Infinite loop? >2048 node path. Remove this message if you really have that long paths (Path.cs, Trace method)");
 					break;
 				}
 			}

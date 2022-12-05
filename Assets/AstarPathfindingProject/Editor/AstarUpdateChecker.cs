@@ -48,7 +48,7 @@ namespace Pathfinding {
 				}
 				catch (System.FormatException) {
 					lastUpdateCheck = System.DateTime.UtcNow;
-					Debug.LogWarning("Invalid DateTime string encountered when loading from preferences");
+					//Debug.LogWarning("Invalid DateTime string encountered when loading from preferences");
 				}
 				return _lastUpdateCheck;
 			}
@@ -243,7 +243,7 @@ namespace Pathfinding {
 			hasParsedServerMessage = true;
 
 #if ASTARDEBUG
-			Debug.Log("Result from update check:\n"+result);
+			//Debug.Log("Result from update check:\n"+result);
 #endif
 
 			string[] splits = result.Split('|');
@@ -264,13 +264,13 @@ namespace Pathfinding {
 			try {
 				latestVersion = new System.Version(astarServerData["VERSION:branch"]);
 			} catch (System.Exception ex) {
-				Debug.LogWarning("Could not parse version\n"+ex);
+				//Debug.LogWarning("Could not parse version\n"+ex);
 			}
 
 			try {
 				latestBetaVersion = new System.Version(astarServerData["VERSION:beta"]);
 			} catch (System.Exception ex) {
-				Debug.LogWarning("Could not parse version\n"+ex);
+				//Debug.LogWarning("Could not parse version\n"+ex);
 			}
 		}
 
@@ -289,7 +289,7 @@ namespace Pathfinding {
 					EditorPrefs.DeleteKey("AstarRemindUpdateVersion");
 				}
 			} catch {
-				Debug.LogError("Invalid AstarRemindUpdateVersion or AstarRemindUpdateDate");
+				//Debug.LogError("Invalid AstarRemindUpdateVersion or AstarRemindUpdateDate");
 			}
 
 			var skipVersion = new System.Version(EditorPrefs.GetString("AstarSkipUpToVersion", AstarPath.Version.ToString()));

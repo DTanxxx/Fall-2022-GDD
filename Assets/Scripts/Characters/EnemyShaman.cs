@@ -60,7 +60,7 @@ public class EnemyShaman : EnemyShooterBase{
     {
         if (fireTimer <= Mathf.Epsilon)
         {
-            // Debug.Log("Fire!");
+            // //Debug.Log("Fire!");
             var fireDir = (closest.transform.position - transform.position).normalized;
             GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
             float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;

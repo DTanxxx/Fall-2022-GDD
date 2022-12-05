@@ -1027,7 +1027,7 @@ namespace Pathfinding {
 			UpdateTransform();
 
 			if (width > 1024 || depth > 1024) {
-				Debug.LogError("One of the grid's sides is longer than 1024 nodes");
+				//Debug.LogError("One of the grid's sides is longer than 1024 nodes");
 				yield break;
 			}
 
@@ -1282,11 +1282,11 @@ namespace Pathfinding {
 		public void ErodeWalkableArea (int xmin, int zmin, int xmax, int zmax) {
 			if (erosionUseTags) {
 				if (erodeIterations+erosionFirstTag > 31) {
-					Debug.LogError("Too few tags available for "+erodeIterations+" erode iterations and starting with tag " + erosionFirstTag + " (erodeIterations+erosionFirstTag > 31)", active);
+					//Debug.LogError("Too few tags available for "+erodeIterations+" erode iterations and starting with tag " + erosionFirstTag + " (erodeIterations+erosionFirstTag > 31)", active);
 					return;
 				}
 				if (erosionFirstTag <= 0) {
-					Debug.LogError("First erosion tag must be greater or equal to 1", active);
+					//Debug.LogError("First erosion tag must be greater or equal to 1", active);
 					return;
 				}
 			}
@@ -1970,7 +1970,7 @@ namespace Pathfinding {
 		/// <summary>Internal function to update an area of the graph</summary>
 		void IUpdatableGraph.UpdateArea (GraphUpdateObject o) {
 			if (nodes == null || nodes.Length != width*depth) {
-				Debug.LogWarning("The Grid Graph is not scanned, cannot update area");
+				//Debug.LogWarning("The Grid Graph is not scanned, cannot update area");
 				//Not scanned
 				return;
 			}
@@ -2210,7 +2210,7 @@ namespace Pathfinding {
 			if (nodes == null || nodes.Length == 0) return;
 
 			if (width*depth != nodes.Length) {
-				Debug.LogError("Node data did not match with bounds data. Probably a change to the bounds/width/depth data was made after scanning the graph just prior to saving it. Nodes will be discarded");
+				//Debug.LogError("Node data did not match with bounds data. Probably a change to the bounds/width/depth data was made after scanning the graph just prior to saving it. Nodes will be discarded");
 				nodes = new GridNode[0];
 				return;
 			}
@@ -2220,7 +2220,7 @@ namespace Pathfinding {
 					var node = nodes[z*width+x];
 
 					if (node == null) {
-						Debug.LogError("Deserialization Error : Couldn't cast the node to the appropriate type - GridGenerator");
+						//Debug.LogError("Deserialization Error : Couldn't cast the node to the appropriate type - GridGenerator");
 						return;
 					}
 

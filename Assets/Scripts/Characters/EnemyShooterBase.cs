@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
+using Random = System.Random;
 
 public abstract class EnemyShooterBase : EnemyBase{
     [SerializeField] protected GameObject bulletPrefab = null;
     [SerializeField] protected float bulletForce = 20f;
     [SerializeField] protected GameObject strafeWaypoint;
-    protected float timeUntilNextDodge = 3f;
-    protected float dodgeCooldown = 3f;
+    protected float timeUntilNextDodge = 1f;
+    [SerializeField] protected float dodgeCooldown = 1f; //cool down for strafing
     protected bool dodgeLeft = true;
+    protected bool isHorizontalDodge = true;
     protected Vector3 offset;
 
     private bool timerRunning = false;
+    private static Random rnd = new Random();
 
     protected override void Start()
     {
@@ -30,7 +33,7 @@ public abstract class EnemyShooterBase : EnemyBase{
     {
         if (seePlayer && fireTimer <= Mathf.Epsilon)
         {
-            Debug.Log("Fire!");
+            ////Debug.Log("Fire!");
             var fireDir = (player.transform.position - transform.position).normalized;
             GameObject bulletInstance = Instantiate(bulletPrefab, firingOrigin.position, firingOrigin.rotation);
             float angle = Mathf.Atan2(fireDir.y, fireDir.x) * Mathf.Rad2Deg - 90f;
@@ -46,6 +49,8 @@ public abstract class EnemyShooterBase : EnemyBase{
         }
     }
 
+
+    /* If player is seen, enemy starts strafing in all 4 directions */
     protected void DodgePlayerIfSeen()
     {
         if (seePlayer)
@@ -53,11 +58,9 @@ public abstract class EnemyShooterBase : EnemyBase{
             timeUntilNextDodge -= Time.deltaTime;
             if (timeUntilNextDodge <= 0f)
             {
-                Debug.Log("Dodge");
-                Debug.Log(transform.position);
-                //Dodge();
+                //Debug.Log("Dodge");
+                Dodge();
                 timeUntilNextDodge = dodgeCooldown;
-                Debug.Log(transform.position);
             }
         }
         else
@@ -66,22 +69,31 @@ public abstract class EnemyShooterBase : EnemyBase{
         }
     }
 
+    /* Strafes on both x and y axis */
     protected void Dodge()
     {
-        if (dodgeLeft == true) 
-        {
-            offset = new Vector3(10, 0, 0);
+        float offsetAmount = (float) rnd.NextDouble();
+        if (dodgeLeft == true) {
+            offsetAmount = -offsetAmount;
             dodgeLeft = false;
-        }
-        else 
-        {
-            offset = new Vector3(-10, 0, 0);
+        } else {
             dodgeLeft = true;
         }
+        offset = orientation(offsetAmount, rnd.Next(2));
         Vector3 newPos = transform.position + offset;
         Vector3 localPos = transform.InverseTransformPoint(newPos);
-        strafeWaypoint.transform.position = localPos;
+        strafeWaypoint.transform.position = newPos;
         transform.parent.GetComponent<EnemyMovement>().MoveTo(strafeWaypoint.transform, speedMultiplier * 6);
+    }
+
+    /* Choosing to strafe on x or y axis */
+    private Vector3 orientation(float offset, int isHorizontal)
+    {
+        if (isHorizontal == 0) {
+            return new Vector3(offset, 0, 0);
+        } else {
+            return new Vector3(0, offset, 0);
+        }
     }
 
 

@@ -878,7 +878,7 @@
 		- Fixed LayerGridGraphs assuming there were no obstacles nearby if no ground was found.
 		- Fixed DynamicGridObstacle getting caught in an infinite loop if there was no AstarPath component in the scene when it was created. Thanks MeiChen for finding the bug.
 		- Fixed NodeLink2 deserialization causing exceptions if the node hadn't linked to anything when it was serialized. Thanks Skalev for finding the bug.
-		- Fixed the AlternativePath modifier could crash the pathfinding threads if it logged a warning since it used the Debug.Log(message,object) overload which
+		- Fixed the AlternativePath modifier could crash the pathfinding threads if it logged a warning since it used the //Debug.Log(message,object) overload which
 			can only be used from the Unity thread.
 		- Fixed an issue where layer mask fields in graph editors would show 'Nothing' if they only included layers which had no name set.
 		- Fixed potential memory leak.

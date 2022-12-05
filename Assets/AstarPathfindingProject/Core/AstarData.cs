@@ -353,7 +353,7 @@ namespace Pathfinding {
 						DeserializeGraphsPartAdditive(sr);
 						sr.CloseDeserialize();
 					} else {
-						Debug.Log("Invalid data file (cannot read zip).\nThe data is either corrupt or it was saved using a 3.0.x or earlier version of the system");
+						//Debug.Log("Invalid data file (cannot read zip).\nThe data is either corrupt or it was saved using a 3.0.x or earlier version of the system");
 					}
 				} else {
 					throw new System.ArgumentNullException("bytes");

@@ -242,7 +242,7 @@ namespace Pathfinding {
 
 #if ASTAR_PROFILE
 			watch.Stop();
-			Debug.Log((1000*watch.Elapsed.TotalSeconds).ToString("0.0 ms"));
+			//Debug.Log((1000*watch.Elapsed.TotalSeconds).ToString("0.0 ms"));
 #endif
 			return result;
 		}

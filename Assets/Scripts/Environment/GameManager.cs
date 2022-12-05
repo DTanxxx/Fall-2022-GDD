@@ -41,14 +41,14 @@ public class GameManager : MonoBehaviour
         if (enemiesLeft == 0)
         {
             // Player has won!
-            Debug.Log("Won!");
+            //Debug.Log("Won!");
         }
     }
 
     public void RecieveKey()
     {
         hasKey = true;
-        Debug.Log("+1 Key");
+        //Debug.Log("+1 Key");
     }
 
     public void RestartLevel()

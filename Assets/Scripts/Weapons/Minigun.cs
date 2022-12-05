@@ -32,7 +32,7 @@ public class Minigun : Gun
             }
             else
             {
-                Debug.Log("Out of Ammo");
+                //Debug.Log("Out of Ammo");
             }
         }
     }
@@ -60,7 +60,7 @@ public class Minigun : Gun
     }
 
     public override void drop() {
-        Debug.Log("in minigun drop");
+        //Debug.Log("in minigun drop");
         Instantiate(minigunPrefab, firingOrigin.position, firingOrigin.rotation);
         FindObjectOfType<GameManager>().minigunAmmo = ammo;
     }

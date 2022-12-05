@@ -77,8 +77,8 @@ namespace Pathfinding {
 		}
 
 		[System.Diagnostics.ConditionalAttribute("PROFILE")]
-		/// <summary>Log using Debug.Log</summary>
-		public void Log () {
+	/// <summary>Log using //Debug.Log</summary>
+	public void Log () {
 			UnityEngine.Debug.Log(ToString());
 		}
 

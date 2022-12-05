@@ -31,9 +31,9 @@ public class Pistol : Gun
             {
                 Shoot();
             }
-            else
+        else
             {
-                Debug.Log("Out of Ammo");
+                //Debug.Log("Out of Ammo");
             }
         }
         Recharge();
@@ -55,7 +55,7 @@ public class Pistol : Gun
         {
             ammo = Mathf.Min(maxAmmo, ammo + rechargeRate);
             rechargeStart = Time.time + chargeDelay;
-            Debug.Log("+1 Ammo");
+            //Debug.Log("+1 Ammo");
         }
     }
 

@@ -79,7 +79,7 @@ public class Health : MonoBehaviour
             if (GetComponent<PlayerMovement>())
             {
                 // Player has died!
-                Debug.Log("Lost!");
+                //Debug.Log("Lost!");
                 Destroy(gameObject);
                 FindObjectOfType<GameManager>().RestartLevel();
             }

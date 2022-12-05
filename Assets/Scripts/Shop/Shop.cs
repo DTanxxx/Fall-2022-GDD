@@ -39,11 +39,11 @@ public class Shop : MonoBehaviour
         bool success = item.GetPrice() <= inventory.GetCoins();
         if (!success)
         {
-            Debug.Log("Not enough money to purchase " + item.GetDisplayName());
+            //Debug.Log("Not enough money to purchase " + item.GetDisplayName());
             return false;
         }
 
-        Debug.Log("Purchased " + item.GetDisplayName());
+        //Debug.Log("Purchased " + item.GetDisplayName());
         item.Purchase();
         inventory.GainCoins(-item.GetPrice());
         ApplyItemEffect(index);

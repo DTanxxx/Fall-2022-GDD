@@ -122,7 +122,7 @@ namespace Pathfinding.Serialization {
 			System.Type type = System.Type.GetType(typename);
 
 			if (type == null) {
-				Debug.LogError("Could not find type '"+typename+"'. Cannot deserialize Unity reference");
+				//Debug.LogError("Could not find type '"+typename+"'. Cannot deserialize Unity reference");
 				return null;
 			}
 
@@ -377,7 +377,7 @@ namespace Pathfinding.Serialization {
 				graphs[i].GetNodes(node => {
 					maxIndex = Math.Max(node.NodeIndex, maxIndex);
 					if (node.NodeIndex == -1) {
-						Debug.LogError("Graph contains destroyed nodes. This is a bug.");
+						//Debug.LogError("Graph contains destroyed nodes. This is a bug.");
 					}
 				});
 			}
@@ -508,7 +508,7 @@ namespace Pathfinding.Serialization {
 #endif
 			} catch (Exception e) {
 				// Catches exceptions when an invalid zip file is found
-				Debug.LogError("Caught exception when loading from zip\n"+e);
+				//Debug.LogError("Caught exception when loading from zip\n"+e);
 
 				zipStream.Dispose();
 				return false;
@@ -699,7 +699,7 @@ namespace Pathfinding.Serialization {
 			// Sanity check
 			// Make sure the graphs don't contain destroyed nodes
 			if (AnyDestroyedNodesInGraphs()) {
-				Debug.LogError("Graph contains destroyed nodes. This is a bug.");
+				//Debug.LogError("Graph contains destroyed nodes. This is a bug.");
 			}
 
 			// Deserialize map from old node indices to new nodes
